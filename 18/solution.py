@@ -68,7 +68,7 @@ def get_tokens(problem):
     return tokens
 
 
-def build_tree(tokens_queue, precendence):
+def build_tree(tokens_queue, precedence):
     """
     backus-naur form (for NO precedence):
     <expression> ::= <term> ( ("*"| "+") <term> )
@@ -111,7 +111,7 @@ def build_tree(tokens_queue, precendence):
             return left_hand
 
     def get_expression(tokens_queue):
-        if precendence:
+        if precedence:
             left_hand = get_additive(tokens_queue)
             if len(tokens_queue) > 0 and tokens_queue[-1].type == TokenType.MULTIPLICATION:
                 node = None
@@ -165,10 +165,10 @@ def solve_for_terms(terms):
     return total
 
 
-def solve_problem(problem, precendence=False):
+def solve_problem(problem, precedence=False):
     tokens = get_tokens(problem)
     tokens.reverse()
-    tree = build_tree(tokens, precendence)
+    tree = build_tree(tokens, precedence)
     return tree.solve()
 
 
